@@ -52,7 +52,8 @@ for i in range(1, 20):
     # append the number of selected features and the corresponding score to the lists
     n_features_bwd.append(i)
     scores_bwd.append(score_bwd)
-    print(score_bwd)
+#     print(score_bwd)
+    st.write(score_bwd)
 
 # define a function to plot the scores
 def plot_scores(n):
