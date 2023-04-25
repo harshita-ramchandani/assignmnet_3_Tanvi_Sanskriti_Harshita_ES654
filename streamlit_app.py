@@ -70,4 +70,4 @@ iterations_slider = IntSlider(min=1, max=len(n_features_fwd), value=len(n_featur
 # use the interact function to link the slider to the plot
 interact(plot_scores, n=iterations_slider)
 
-# st.write("hello world")
+st.write("hello world")
