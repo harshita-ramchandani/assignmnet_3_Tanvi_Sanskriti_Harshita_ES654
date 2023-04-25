@@ -56,14 +56,23 @@ for i in range(1, 20):
     st.write(score_bwd)
 
 # define a function to plot the scores
+# def plot_scores(n):
+#     plt.plot(n_features_fwd[:n], scores_fwd[:n], label='Forward')
+#     plt.plot(n_features_bwd[:n], scores_bwd[:n], label='Backward')
+#     plt.xlabel('Number of Features')
+#     plt.ylabel('Accuracy')
+#     plt.title('Sequential Feature Selection')
+#     plt.legend()
+#     st.pyplot()
 def plot_scores(n):
-    plt.plot(n_features_fwd[:n], scores_fwd[:n], label='Forward')
-    plt.plot(n_features_bwd[:n], scores_bwd[:n], label='Backward')
-    plt.xlabel('Number of Features')
-    plt.ylabel('Accuracy')
-    plt.title('Sequential Feature Selection')
-    plt.legend()
-    st.pyplot()
+    fig, ax = plt.subplots()
+    ax.plot(n_features_fwd[:n], scores_fwd[:n], label='Forward')
+    ax.plot(n_features_bwd[:n], scores_bwd[:n], label='Backward')
+    ax.set_xlabel('Number of Features')
+    ax.set_ylabel('Accuracy')
+    ax.set_title('Sequential Feature Selection')
+    ax.legend()
+    st.pyplot(fig)
 
 # create a slider for the number of iterations
 iterations_slider = IntSlider(min=1, max=len(n_features_fwd), value=len(n_features_fwd), description='Iterations:')
