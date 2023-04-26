@@ -25,13 +25,17 @@ We are using **Logistic Regression** and **Linear Regression** as our classifier
 
 
 # # # Interpretation of the graphs
-*** Logistic Regression ***
+*Logistic Regression*
 In the Logistic Regression graph as we can clearly see that with the increase in number of iterations, the accuracy score is improving.Forward feature selection and backward feature selection both are converging to almost similar values. But Forward feature selection seems to perform better with increased number of informative fatures selected.
 
 
 
 # # # # First Plot: 
-*** Linear Regression ***
+/
+/
+*Linear Regression*
+/
+/
 **Forward Feature Selection**
 
 The first plot is for forward feature selection and uses a slider to change the number of selected features. The plot shows the ***mean squared error (MSE)*** for two lines:
