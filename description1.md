@@ -18,7 +18,8 @@ The dataset has been created using sklearn's make_classification()
 \
 \
 We are using **Logistic Regression** and **Linear Regression** as our classifiers.
-### Working of our app
+### Working of our code
+Our code generates a synthetic dataset using make_classification from scikit-learn, initializes two SequentialFeatureSelector objects for forward and backward feature selection, and loops through a range of iterations to select a variable number of features. At each iteration, our code fits the SequentialFeatureSelector object, gets the selected features and their corresponding scores, appends the number of selected features and the corresponding score to the lists, and plots the scores using matplotlib. It saves the selected models using pickle. Finally, we are displaying the app in Streamlit and we have created a slider that allows the user to interact with the plot by selecting the number of iterations to display.
 
 
 
@@ -31,8 +32,8 @@ In the Logistic Regression graph as we can clearly see that with the increase in
 
 
 ### First Plot:
-*Linear Regression* \\
-Forward Feature Selection\
+*Linear Regression* 
+Forward Feature Selection
 
 The first plot is for forward feature selection and uses a slider to change the number of selected features. The plot shows the ***mean squared error (MSE)*** for two lines:
 
