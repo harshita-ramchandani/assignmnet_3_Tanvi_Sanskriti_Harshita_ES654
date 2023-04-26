@@ -1,6 +1,6 @@
 # DESCRIPTION
-\
-\
+<br/>
+
 ## Dataset
 The dataset has been created using sklearn's make_classification() and has 100 samples and 20 features as we were asked to create a high dimensional datatset
 \
@@ -27,7 +27,7 @@ Our code generates a synthetic dataset using make_classification from scikit-lea
 
 ### Interpretation of the graphs
 *Logistic Regression*
-In the Logistic Regression graph as we can clearly see that with the increase in number of iterations, the accuracy score is improving.Forward feature selection and backward feature selection both are converging to almost similar values. But Forward feature selection seems to perform better with increased number of informative fatures selected.
+In the Logistic Regression graph as we can clearly see that with the increase in number of iterations, the accuracy score is improving.Forward feature selection and backward feature selection both are converging to almost similar values. But Forward feature selection seems to perform better with increased number of informative features selected.
 
 
 
