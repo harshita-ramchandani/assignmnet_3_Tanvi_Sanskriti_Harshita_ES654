@@ -1,4 +1,6 @@
 # DESCRIPTION
+\
+\
 # # Dataset
 The dataset has been created using sklearn's make_classification()
 \
@@ -15,7 +17,7 @@ The dataset has been created using sklearn's make_classification()
 # # Model
 \
 \
-
 We are using **Logistic Regression** as our classifier.
+
 
 
