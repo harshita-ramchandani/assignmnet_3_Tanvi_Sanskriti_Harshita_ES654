@@ -1,155 +1,79 @@
 import streamlit as st
-    # generate the dataset
 from sklearn.datasets import make_classification
 from sklearn.feature_selection import SequentialFeatureSelector
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
 import matplotlib.pyplot as plt
-    #%matplotlib inline
-import ipywidgets as widgets
-from ipywidgets import interact, IntSlider
-from IPython.display import display
-import time 
-import runpy
-import pickle
-import os
-from sklearn.pipeline import make_pipeline
 
+# set page title
+st.set_page_config(page_title="Sequential Feature Selection")
 
-st.set_page_config(
-        page_title="Multipage App",
-        page_icon="👋",
-    )
-
-
-
-st.title("Logistic Regression")
-st.subheader("Forward and Backward Feature Selection")
-st.header("Machine Learning")
-st.markdown("---  ")
-    #st.text("hello world")
-
-    #st.markdown("**hello** World ")
-
-
-
-bar = st.progress(0)
-
-
-
+# generate the dataset outside the app function
 X, y = make_classification(n_samples=100, n_features=20, n_informative=15,
-                            n_redundant=2, n_repeated=0, n_classes=2,
-                            class_sep=2.0, random_state=42)
+                           n_redundant=2, n_repeated=0, n_classes=2,
+                           class_sep=2.0, random_state=42)
 
-    # create a sequential forward feature selector
+# create a sequential forward feature selector
 sfs = SequentialFeatureSelector(LogisticRegression(), direction='forward', n_features_to_select=10)
 
-    # create a sequential backward feature selector
+# create a sequential backward feature selector
 sbs = SequentialFeatureSelector(LogisticRegression(), direction='backward', n_features_to_select=10)
 
-    # initialize empty lists to store the number of selected features and corresponding scores
+# initialize empty lists to store the number of selected features and corresponding scores
 n_features_fwd = []
 scores_fwd = []
 n_features_bwd = []
 scores_bwd = []
 
-st.write('Starting a long computation...')
-    # loop through a range of iterations to select a variable number of features
+# create a slider for the number of iterations
+iterations_slider = st.slider(min_value=1, max_value=20, value=1, step=4, label='Iterations:')
 
-lr = LogisticRegression()
+# loop through a range of iterations to select a variable number of features
+for i in range(1, iterations_slider):
+    # create a new instance of the logistic regression model
+    lr = LogisticRegression()
+    sfs = SequentialFeatureSelector(LogisticRegression(), direction='forward', n_features_to_select=i) 
+    # fit the sequential forward feature selector
+    sfs.fit(X, y)
+    # get the selected features and their corresponding scores
+    selected_features_fwd = sfs.transform(X)
+    lr.fit(selected_features_fwd, y)
+    score_fwd = accuracy_score(y, lr.predict(selected_features_fwd))
+    # append the number of selected features and the corresponding score to the lists
+    n_features_fwd.append(i)
+    scores_fwd.append(score_fwd)
 
-#you can change the range here
-for i in range(3, 6):
+    # create a new instance of the logistic regression model
+    lr = LogisticRegression()
+    sbs = SequentialFeatureSelector(LogisticRegression(), direction='backward', n_features_to_select=i)
+    # fit the sequential backward feature selector
+    sbs.fit(X, y)
+    # get the selected features and their corresponding scores
+    selected_features_bwd = sbs.transform(X)
+    lr.fit(selected_features_bwd, y)
+    score_bwd = accuracy_score(y, lr.predict(selected_features_bwd))
+    # append the number of selected features and the corresponding score to the lists
+    n_features_bwd.append(i)
+    scores_bwd.append(score_bwd)
 
-
-
-        # create a new instance of the logistic regression model
-        
-        sfs = SequentialFeatureSelector(LogisticRegression(), direction='forward', n_features_to_select=i) 
-        # fit the sequential forward feature selector
-        sfs.fit(X, y)
-        # get the selected features and their corresponding scores
-        selected_features_fwd = sfs.transform(X)
-        lr.fit(selected_features_fwd, y)
-        score_fwd = accuracy_score(y, lr.predict(selected_features_fwd))
-        # append the number of selected features and the corresponding score to the lists
-        n_features_fwd.append(i)
-        scores_fwd.append(score_fwd)
-        st.write(score_fwd)
-
-
-        
-        #time.sleep(0.05)
-
-
-        # create a new instance of the logistic regression model
-        
-        sbs = SequentialFeatureSelector(LogisticRegression(), direction='backward', n_features_to_select=i)
-        # fit the sequential backward feature selector
-        sbs.fit(X, y)
-        # get the selected features and their corresponding scores
-        selected_features_bwd = sbs.transform(X)
-        lr.fit(selected_features_bwd, y)
-        score_bwd = accuracy_score(y, lr.predict(selected_features_bwd))
-        # append the number of selected features and the corresponding score to the lists
-        n_features_bwd.append(i)
-        scores_bwd.append(score_bwd)
-        st.write(score_bwd)
-
-
-        bar.progress(i+20)
-        """"
-        if not os.path.exists("models"):
-         os.mkdir("models")
-        with open(f'models/model_fwd_{i}.pkl', 'wb') as f:
-          pickle.dump(sfs, f)
-        with open(f'models/model_bwd_{i}.pkl', 'wb') as f:
-          pickle.dump(sbs, f)
-
-        
-def load_model(model_name):
-    with open(model_name, 'rb') as f:
-        model = pickle.load(f)
-    return model
-
-# load the pickled models
-model_fwd = load_model('models/model_fwd_1.pkl')
-model_bwd = load_model('models/model_bwd_1.pkl')
-
-model_fwd = load_model('models/model_fwd_5.pkl')
-model_bwd = load_model('models/model_bwd_5.pkl')
-"""
-#st.balloons()
-    #st.write('...and now we\'re done!')
-st.success('Done!')
-
+# define the Streamlit app function
+def app():
     # define a function to plot the scores
-#@st.cache_data
-def plot_scores(n):
-        fig=plt.figure()
-        #plt.style.use("https://github.com/dhaitz/matplotlib-stylesheets/raw/master/pitayasmoothie-dark.mplstyle")
-        plt.plot(n_features_fwd[:n], scores_fwd[:n], label='Forward')
-        plt.plot(n_features_bwd[:n], scores_bwd[:n], label='Backward')
-        plt.xlabel('Number of Features')
-        plt.ylabel('Accuracy')
-        plt.title('Sequential Feature Selection')
-        plt.legend()
-        #plt.show()
+    def plot_scores(n):
+        fig, ax = plt.subplots()
+        ax.plot(n_features_fwd[:n], scores_fwd[:n], label='Forward')
+        ax.plot(n_features_bwd[:n], scores_bwd[:n], label='Backward')
+        ax.set_xlabel('Number of Features')
+        ax.set_ylabel('Accuracy')
+        ax.set_title('Sequential Feature Selection')
+        ax.legend()
         st.pyplot(fig)
 
     
 
+    # display the plot
+    plot_scores(iterations_slider)
 
-
-
-if __name__ == '__main__':
-        #run_app()   
-
-    # create a slider for the number of iterations
-        iterations_slider = st.slider(label="Iterations", min_value=1, max_value=len(n_features_fwd), value=len(n_features_fwd))
-
-    # use the interact function to link the slider to the plot
-        interact(plot_scores, n=iterations_slider)
-
-
-
+# # call the app function
+if __name__ == "__main__":
+    app()
