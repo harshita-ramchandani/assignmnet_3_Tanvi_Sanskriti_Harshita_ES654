@@ -12,8 +12,7 @@ The dataset has been created using sklearn's make_classification() and has 100 s
 \
 \
 **Number of classes:** 2(as it is a binary classification problem)
-\
-\
+<br/>
 ## Model
 \
 \
