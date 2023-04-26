@@ -2,7 +2,7 @@
 \
 \
 ## Dataset
-The dataset has been created using sklearn's make_classification()
+The dataset has been created using sklearn's make_classification() and has 100 samples and 20 features as we were asked to create a high dimensional datatset
 \
 \
 **Number of samples:** 100
