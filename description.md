@@ -30,13 +30,9 @@ In the Logistic Regression graph as we can clearly see that with the increase in
 
 
 
-# # # # First Plot: 
-/
-/
-*Linear Regression*
-/
-/
-**Forward Feature Selection**
+# # # First Plot:
+*Linear Regression*\
+Forward Feature Selection\
 
 The first plot is for forward feature selection and uses a slider to change the number of selected features. The plot shows the ***mean squared error (MSE)*** for two lines:
 
