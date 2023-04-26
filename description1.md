@@ -1,7 +1,7 @@
 # DESCRIPTION
 \
 \
-# # Dataset
+## Dataset
 The dataset has been created using sklearn's make_classification()
 \
 \
@@ -14,23 +14,23 @@ The dataset has been created using sklearn's make_classification()
 **Number of classes:** 2(as it is a binary classification problem)
 \
 \
-# # Model
+## Model
 \
 \
 We are using **Logistic Regression** and **Linear Regression** as our classifiers.
-# # # Working of our app
+### Working of our app
 
 
 
 
 
-# # # Interpretation of the graphs
+### Interpretation of the graphs
 *Logistic Regression*
 In the Logistic Regression graph as we can clearly see that with the increase in number of iterations, the accuracy score is improving.Forward feature selection and backward feature selection both are converging to almost similar values. But Forward feature selection seems to perform better with increased number of informative fatures selected.
 
 
 
-# # # First Plot:
+### First Plot:
 *Linear Regression* \\
 Forward Feature Selection\
 
@@ -41,7 +41,7 @@ The MSE using only the selected features *(in red dots)*
 The x-axis shows the number of selected features, and the y-axis shows the MSE. 
 
 
-# # # # Second Plot: 
+### Second Plot: 
 **Forward and Backward Feature Selection**
 The second plot is for both forward and backward feature selection and uses a slider to change the number of selected features. The plot shows the accuracy score for two lines:
 
