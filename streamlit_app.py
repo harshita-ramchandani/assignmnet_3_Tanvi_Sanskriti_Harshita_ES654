@@ -119,7 +119,7 @@ model_bwd = load_model('models/model_bwd_1.pkl')
 model_fwd = load_model('models/model_fwd_5.pkl')
 model_bwd = load_model('models/model_bwd_5.pkl')
 """
-st.balloons()
+#st.balloons()
     #st.write('...and now we\'re done!')
 st.success('Done!')
 
@@ -127,7 +127,7 @@ st.success('Done!')
 #@st.cache_data
 def plot_scores(n):
         fig=plt.figure()
-        plt.style.use("https://github.com/dhaitz/matplotlib-stylesheets/raw/master/pitayasmoothie-dark.mplstyle")
+        #plt.style.use("https://github.com/dhaitz/matplotlib-stylesheets/raw/master/pitayasmoothie-dark.mplstyle")
         plt.plot(n_features_fwd[:n], scores_fwd[:n], label='Forward')
         plt.plot(n_features_bwd[:n], scores_bwd[:n], label='Backward')
         plt.xlabel('Number of Features')
