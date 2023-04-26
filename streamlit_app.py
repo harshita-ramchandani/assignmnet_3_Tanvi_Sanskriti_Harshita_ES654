@@ -124,7 +124,7 @@ st.balloons()
 st.success('Done!')
 
     # define a function to plot the scores
-@st.cache_data
+#@st.cache_data
 def plot_scores(n):
         fig=plt.figure()
         plt.style.use("https://github.com/dhaitz/matplotlib-stylesheets/raw/master/pitayasmoothie-dark.mplstyle")
